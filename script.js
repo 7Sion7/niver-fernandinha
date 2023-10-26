@@ -6,7 +6,7 @@ var w = c.width = window.innerWidth,
 		hh = h / 2,
 		
 		opts = {
-			strings: [ '11', 'Feliz', 'Aniversario, Fernandinha!', 'Que Deus te abencoe!', ':)' ],
+			strings: ['11', 'Fernandinha!', 'Deus te abençoe', ':)' ],
 			charSize: 30,
 			charSpacing: 35,
 			lineHeight: 40,
@@ -396,20 +396,10 @@ window.addEventListener('resize', function() {
     hw = w / 2;
     hh = h / 2;
 
-    // Recalculate charSize, lineHeight, and charSpacing based on the new canvas dimensions
-    opts.charSize = Math.floor(w / 34); // You can adjust this formula as needed
-    opts.lineHeight = Math.floor(h / 17); // You can adjust this formula as needed
-    opts.charSpacing = opts.charSize * 1.2; // You can adjust this multiplier as needed
+	opts.charSize = (w + h) * 0.055; // Adjust the multiplier to fit your design
+    opts.lineHeight = h * 0.2; // Adjust the multiplier to fit your design
+    opts.charSpacing = w * 0.002; // Adjust the multiplier to fit your design
 
     ctx.font = opts.charSize + 'px Verdana';
 
-    // Reset letters based on the updated charSize, lineHeight, and charSpacing
-    letters = [];
-    for (var i = 0; i < opts.strings.length; ++i) {
-        for (var j = 0; j < opts.strings[i].length; ++j) {
-            letters.push(new Letter(opts.strings[i][j],
-                j * opts.charSpacing + opts.charSpacing / 2 - opts.strings[i].length * opts.charSize / 2,
-                i * opts.lineHeight + opts.lineHeight / 2 - opts.strings.length * opts.lineHeight / 2));
-        }
-    }
 });
