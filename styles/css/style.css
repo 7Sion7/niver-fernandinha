@@ -1,4 +1,10 @@
+*, *::before, *::after{
+    margin: 0;
+    box-sizing: border-box;
+}
+
 body {
+    box-sizing: inherit;
     overflow: hidden;
 }
 
@@ -8,8 +14,3 @@ canvas {
 	left: 0;
 }
 
-@media screen and (max-width: 768px) {
-    canvas {
-        font-size: 25px; /* Adjust the font size for smaller screens */
-    }
-}

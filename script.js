@@ -390,13 +390,26 @@ for( var i = 0; i < opts.strings.length; ++i ){
 
 anim();
 
-window.addEventListener( 'resize', function(){
-	
-	w = c.width = window.innerWidth;
-	h = c.height = window.innerHeight;
-	
-	hw = w / 2;
-	hh = h / 2;
-	
-	ctx.font = opts.charSize + 'px Verdana';
-})
+window.addEventListener('resize', function() {
+    w = c.width = window.innerWidth;
+    h = c.height = window.innerHeight;
+    hw = w / 2;
+    hh = h / 2;
+
+    // Recalculate charSize, lineHeight, and charSpacing based on the new canvas dimensions
+    opts.charSize = Math.floor(w / 34); // You can adjust this formula as needed
+    opts.lineHeight = Math.floor(h / 17); // You can adjust this formula as needed
+    opts.charSpacing = opts.charSize * 1.2; // You can adjust this multiplier as needed
+
+    ctx.font = opts.charSize + 'px Verdana';
+
+    // Reset letters based on the updated charSize, lineHeight, and charSpacing
+    letters = [];
+    for (var i = 0; i < opts.strings.length; ++i) {
+        for (var j = 0; j < opts.strings[i].length; ++j) {
+            letters.push(new Letter(opts.strings[i][j],
+                j * opts.charSpacing + opts.charSpacing / 2 - opts.strings[i].length * opts.charSize / 2,
+                i * opts.lineHeight + opts.lineHeight / 2 - opts.strings.length * opts.lineHeight / 2));
+        }
+    }
+});
